@@ -1,0 +1,29 @@
+GardenShedGames colour test
+
+Profile: ISO Coated v2 (ECI), based on FOGRA39L.
+Source: installed C:/Windows/System32/spool/drivers/color/ISOcoated_v2_eci.icc
+ICC SHA-256: 128dc02f7246cc3807af0323695379f64151a8f27a587736acc59f8b6ce894b8
+The exact same ICC bytes are embedded in both files.
+
+PDF: exact 91 x 61 mm MediaBox/BleedBox, centred 85 x 55 mm TrimBox.
+Lossless 8-bit ICCBased CMYK image and matching embedded output intent.
+No crop marks, RGB objects or transparency. This is not certified PDF/X.
+PSD: flattened, 8-bit CMYK, 1075 x 720 px, 300 ppi resolution metadata.
+Non-printing guides mark the trim. At exactly 300 ppi the raster measures
+91.0167 x 60.9600 mm because pixels must be whole numbers. The PDF places
+that same raster at exactly 91 x 61 mm (about 300 ppi).
+
+CMYK percentages are rounded to the nearest 8-bit sample (max error 0.196%).
+Strips: C, M, Y and K at 0/10/25/50/75/90/100%; six labelled mixed patches.
+Maximum ink coverage used: 240%. White bleed is intentional.
+
+Use the PDF for the upload test; preserve the embedded profile if opening
+the PSD. Compare a downloaded production proof against the original using
+the same colour-managed viewer and inspect CMYK values/profiles where possible.
+A changed screen preview alone does not establish that production ink values
+changed. This test cannot prevent the printer from converting the document.
+If instantprint supplied a specific ICC, use that exact file for a second test;
+different profiles can use the same FOGRA39 characterisation data.
+
+Verification: PSD independently reopened using Pillow; all CMYK samples and
+embedded profile matched. PDF image samples and embedded profiles matched.
