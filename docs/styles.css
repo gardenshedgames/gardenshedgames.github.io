@@ -46,12 +46,17 @@ section[id] { scroll-margin-top: 0; }
 .section-intro { max-width: 45rem; margin-bottom: 2.5rem; color: #d0d0d0; font-size: clamp(1.05rem, 2vw, 1.25rem); }
 .has-scroll-animations .reveal { opacity: 0; transform: translateY(1.5rem); transition: opacity .55s ease-out, transform .55s ease-out; }
 .has-scroll-animations .reveal.is-visible { opacity: 1; transform: translateY(0); }
-.services-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); border-top: 1px solid var(--line); border-left: 1px solid var(--line); }
-.service-card { min-height: 16rem; padding: 1.75rem; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); background: var(--surface); }
+.services-grid { display: grid; grid-template-columns: 1fr; gap: 1rem; }
+.service-card { display: grid; grid-template-columns: 2.25rem minmax(0, 1fr); align-items: start; column-gap: 1rem; row-gap: .75rem; min-height: 0; padding: 1.75rem; border: 1px solid var(--line); background: var(--surface); }
 .service-card:hover { background: var(--surface-raised); }
-.service-number { margin-bottom: 2.5rem; color: var(--red); font-size: .8rem; font-weight: 800; letter-spacing: .12em; }
-.service-card h3 { max-width: 18ch; margin-bottom: 1rem; font-size: clamp(1.4rem, 3vw, 2rem); }
-.service-card p:last-child { margin-bottom: 0; color: #d0d0d0; }
+.service-card-featured { border-color: var(--red); }
+.service-heading { display: contents; }
+.service-icon { grid-row: span 3; width: 2.25rem; height: 2.25rem; }
+.service-card h3, .service-card > p { grid-column: 2; }
+.service-card h3 { max-width: none; margin: 0; font-size: clamp(1.4rem, 3vw, 2rem); }
+.service-card-featured h3 { font-size: clamp(1rem, 2.3vw, 2rem); letter-spacing: -.035em; white-space: nowrap; }
+.service-question { margin: 0; color: #fff; font-weight: 700; }
+.service-card p:last-child { margin: 0; color: #d0d0d0; }
 .service-card:nth-child(2) { transition-delay: .08s; }
 .service-card:nth-child(3) { transition-delay: .16s; }
 .service-card:nth-child(4) { transition-delay: .24s; }
@@ -86,7 +91,6 @@ section[id] { scroll-margin-top: 0; }
 @media (max-width: 48rem) {
   .hero-content { grid-template-columns: 1fr; }
   .hero-mark { width: min(70vw, 20rem); }
-  .services-grid { grid-template-columns: 1fr; }
   .social-sidebar { top: auto; right: 50%; bottom: 1rem; transform: translateX(50%); }
   .social-links { display: flex; padding: .5rem; border: 1px solid var(--line); border-radius: 2rem; background: rgba(16, 16, 16, .96); }
   .social-links a { width: 2.75rem; height: 2.75rem; border: 0; }
