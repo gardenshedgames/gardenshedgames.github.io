@@ -36,14 +36,58 @@
     <main id="main-content">
 
       <section class="hero" aria-labelledby="hero-title">
-        <div class="container hero-content reveal">
-          <div>
+        <div class="container hero-content">
+          <div class="reveal">
             <p class="eyebrow">Technical direction. Hands-on delivery.</p>
             <h1 id="hero-title">Grow Your Games.</h1>
             <p class="hero-copy">Fractional technical leadership and hands-on engineering for game studios and indie developers.</p>
             <a class="button" href="#contact">Discuss your project</a>
           </div>
-          <img class="hero-mark" src="assets/gsg-logo.svg" alt="">
+          <button class="logo-replay" type="button" aria-label="Replay the shovel animation" disabled>
+          <svg class="hero-mark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2048 2124" aria-hidden="true" focusable="false">
+            <defs>
+              <path id="hero-shovel" transform="translate(60 0)" fill-rule="evenodd" d="M 1740.37 988.10 L 1937.63 1040.12 Q 1951.16 1043.69 1947.59 1057.23 L 1931.53 1118.15 C 1915.47 1179.06 1859.00 1212.78 1821 1217 L 1696 1689 L 1798 1717 Q 1822 1723 1815 1747 L 1758 1934 C 1731 2009 1648 2036 1578 2016 C 1499 1994 1438 1929 1457 1854 L 1504 1676 Q 1512 1640 1540 1648 L 1630 1672 L 1755 1198 C 1723.63 1177.08 1691.13 1119.90 1707.20 1058.99 L 1723.26 998.07 Q 1726.83 984.53 1740.37 988.10 Z
+                M 1766.96 1051.99 L 1882.99 1082.59 Q 1888.79 1084.12 1887.26 1089.92 L 1883.18 1105.40 C 1873.24 1143.11 1835.10 1166.14 1801.26 1157.22 C 1767.42 1148.29 1745.60 1109.45 1755.55 1071.74 L 1759.63 1056.27 Q 1761.16 1050.46 1766.96 1051.99 Z
+                M 1624.85 1727.53 Q 1616.16 1725.20 1615.76 1734.41 L 1610.64 1865.55 Q 1609.92 1879.86 1616.44 1867.11 L 1677.58 1753.98 Q 1681.84 1742.80 1673.15 1740.47 Z"/>
+              <!-- A 100-unit outline removes 50 units outside each silhouette. -->
+              <mask id="hero-wall-clearance" maskUnits="userSpaceOnUse" x="0" y="0" width="2048" height="2124" style="mask-type:luminance">
+                <rect width="2048" height="2124" fill="white"/>
+                <g fill="black" stroke="black" stroke-width="100" stroke-linejoin="round">
+                  <use href="#hero-roof"/>
+                  <g class="logo-shovel-clearance"><use href="#hero-shovel"/></g>
+                </g>
+              </mask>
+              <clipPath id="hero-below-roof">
+                <path d="M 270 780 Q 625 454 1008 140 Q 1385 443 1758 782 L 2048 2124 H 0 Z"/>
+              </clipPath>
+            </defs>
+            <g class="logo-shed" fill="#f61920">
+              <!-- Roof: a continuous, softly rounded silhouette. -->
+              <path id="hero-roof" d="M 198 694 Q 588 355 981 33 Q 1009 9 1038 33 Q 1447 367 1816 694 Q 1836 712 1821 735 L 1790 778 Q 1776 798 1758 782 Q 1385 443 1008 140 Q 625 454 270 780 Q 250 798 233 780 L 193 733 Q 179 715 198 694 Z"/>
+              <!-- Wall ends follow the adjacent silhouettes at a consistent 50-unit gap. -->
+              <g clip-path="url(#hero-below-roof)" mask="url(#hero-wall-clearance)">
+                <path id="hero-left-wall" d="M 334 550 H 420 C 450 1094 471 1551 474 1987 L 396 1995 C 395 1554 372 1096 334 550 Z"/>
+                <path id="hero-right-wall" d="M 1583 550 H 1662 C 1627 1028 1608 1323 1600 1720 L 1595 1990 H 1522 L 1527 1720 C 1537 1270 1552 964 1583 550 Z"/>
+              </g>
+              <path id="hero-door-frame" d="M 663 629 H 1322 Q 1360 629 1360 667 V 1990 H 1282 V 732 Q 1282 709 1259 709 H 726 Q 704 709 704 732 V 1982 H 626 V 667 Q 626 629 663 629 Z"/>
+              <rect id="hero-left-plank-seam" x="877" y="709" width="24" height="1268" rx="12"/>
+              <rect id="hero-right-plank-seam" x="1083" y="709" width="24" height="1268" rx="12"/>
+              <circle id="hero-door-knob" cx="1195" cy="1283" r="55"/>
+              <!-- Shovel: clean curves with genuine transparent openings. -->
+
+              <path id="hero-left-grass" transform="translate(35 0)" d="M 223 2039 C 189 2014 141 2002 129 1944 Q 120 1914 148 1918 C 180 1922 219 1950 248 1979 C 222 1931 173 1868 176 1828 Q 179 1776 221 1792 C 269 1810 298 1880 319 1925 C 319 1890 334 1865 353 1877 C 383 1895 397 1945 393 2005 Z"/>
+              <path id="hero-ground" d="M 39 2066 C 448 1918 1536 1918 2014 2065 Q 2039 2074 2025 2095 Q 2020 2106 2003 2103 C 1363 1996 705 1996 49 2104 Q 26 2108 23 2089 Q 20 2075 39 2066 Z"/>
+            </g>
+            <g class="logo-shovel" fill="#f61920"><use href="#hero-shovel"/></g>
+            <g fill="#f61920">
+              <circle class="logo-particle" cx="1680" cy="2010" r="27.5"/>
+              <circle class="logo-particle" cx="1680" cy="2010" r="27.5"/>
+              <circle class="logo-particle" cx="1680" cy="2010" r="27.5"/>
+              <circle class="logo-particle" cx="1680" cy="2010" r="27.5"/>
+              <circle class="logo-particle" cx="1680" cy="2010" r="27.5"/>
+            </g>
+          </svg>
+          </button>
         </div>
       </section>
 

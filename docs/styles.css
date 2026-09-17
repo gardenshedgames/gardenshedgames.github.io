@@ -60,7 +60,13 @@ section[id] { scroll-margin-top: 0; }
 .service-card:nth-child(2) { transition-delay: .08s; }
 .service-card:nth-child(3) { transition-delay: .16s; }
 .service-card:nth-child(4) { transition-delay: .24s; }
-.hero-mark { width: min(100%, 22rem); height: auto; filter: drop-shadow(0 0 3rem rgba(245, 29, 37, .22)); }
+.logo-replay { display: block; width: min(100%, 22rem); padding: 0; border: 0; background: transparent; color: inherit; }
+.logo-replay:enabled { cursor: pointer; }
+.logo-replay:focus-visible { outline: 3px solid var(--red); outline-offset: .5rem; }
+.hero-mark { display: block; width: 100%; height: auto; overflow: visible; filter: drop-shadow(0 0 3rem rgba(245, 29, 37, .22)); }
+.logo-particle { opacity: 0; }
+/* Share one pivot in SVG coordinates so the clearance follows the shovel exactly. */
+.logo-shovel, .logo-shovel-clearance { transform-box: view-box; transform-origin: 1740px 1505px; }
 .button { display: inline-block; padding: .8rem 1.2rem; border: 2px solid var(--red); background: var(--red); color: #fff; font-weight: 800; text-decoration: none; }
 .button:hover { border-color: #fff; background: #fff; color: #111; }
 .button-secondary { background: transparent; color: var(--red); }
@@ -90,7 +96,7 @@ section[id] { scroll-margin-top: 0; }
 
 @media (max-width: 48rem) {
   .hero-content { grid-template-columns: 1fr; }
-  .hero-mark { width: min(70vw, 20rem); }
+  .logo-replay { width: min(70vw, 20rem); }
   .social-sidebar { top: auto; right: 50%; bottom: 1rem; transform: translateX(50%); }
   .social-links { display: flex; padding: .5rem; border: 1px solid var(--line); border-radius: 2rem; background: rgba(16, 16, 16, .96); }
   .social-links a { width: 2.75rem; height: 2.75rem; border: 0; }
