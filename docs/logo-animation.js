@@ -1,36 +1,50 @@
+// Respects the visitor's operating-system motion preference.
 const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+// Elements that fade and slide in as their section enters the viewport.
 const revealElements = document.querySelectorAll(".reveal");
+// Interactive container for the layered hero logo.
 const logoReplay = document.querySelector(".logo-replay");
+// Header elements used by the compact navigation menu.
 const siteHeader = document.querySelector(".site-header");
 const navigationToggle = document.querySelector(".nav-toggle");
 const primaryNavigation = document.querySelector("#primary-navigation");
+// Individual SVG layers used while the logo animation is playing.
 const staticLayers = document.querySelectorAll(".hero-walls, .hero-roof, .hero-ground");
 const shovel = document.querySelector(".hero-shovel");
 const clearance = document.querySelector(".hero-shovel-clearance");
 const particles = document.querySelectorAll(".hero-particle");
 
 if (logoReplay && staticLayers.length === 3 && shovel && clearance && particles.length) {
+  // Retained Web Animations instances make a replay possible without rebuilding the DOM.
   const animations = [];
+  // Prevents an earlier animation's completion callback replacing a newer replay.
   let animationRun = 0;
+  // The SVG artwork's coordinate system, used to translate artwork values into CSS pixels.
   const logoWidth = 2048;
   const logoHeight = 2124;
+  // The visible particle radius and its black clearance border, in artwork units.
   const radius = 20.625;
   const clearanceRadius = radius + 25;
+  // Launch positions and velocities define the five soil-particle trajectories.
   const launches = [
     { x: 1490, velocityX: -440, upwardSpeed: 1780, extraGroundOverlap: 20 }, { x: 1490, velocityX: -300, upwardSpeed: 1930, extraGroundOverlap: 20 },
     { x: 1490, velocityX: -200, upwardSpeed: 1650, extraGroundOverlap: 20 }, { x: 1870, velocityX: 102, upwardSpeed: 1850, extraGroundOverlap: 0 },
     { x: 1870, velocityX: 122, upwardSpeed: 1620, extraGroundOverlap: 0 }
   ];
+  // Timings coordinate the logo build-up before particles leave the shovel.
   const fadeDelay = 250;
   const fadeDuration = 800;
   const dropDelay = fadeDelay + fadeDuration;
   const dropDuration = 1400;
   const impactTime = dropDelay + dropDuration;
+  // Particles land slightly behind the foreground ground so they disappear cleanly.
   const groundOverlap = 22.25;
+  // Evaluates a cubic Bézier curve; used to match particle landings to the ground curve.
   const cubic = (t, start, first, second, end) => {
     const inverse = 1 - t;
     return inverse ** 3 * start + 3 * inverse ** 2 * t * first + 3 * inverse * t ** 2 * second + t ** 3 * end;
   };
+  // Finds the foreground ground's y-coordinate for an artwork x-coordinate.
   const groundY = (x) => {
     let low = 0;
     let high = 1;
@@ -47,6 +61,7 @@ if (logoReplay && staticLayers.length === 3 && shovel && clearance && particles.
     animation.currentTime = 0;
     animations.push(animation);
   };
+  // Builds the Web Animations once, using the logo's rendered size for scaling.
   const prepare = () => {
     const bounds = logoReplay.getBoundingClientRect();
     const scaleX = bounds.width / logoWidth;
@@ -61,6 +76,7 @@ if (logoReplay && staticLayers.length === 3 && shovel && clearance && particles.
       const originY = groundY(x) - radius;
       particle.style.left = `${((x - clearanceRadius) / logoWidth) * 100}%`;
       particle.style.top = `${((originY - clearanceRadius) / logoHeight) * 100}%`;
+      // A simple ballistic curve determines each particle's vertical path.
       const displacementY = (time) => -upwardSpeed * time + 0.5 * 3000 * time ** 2;
       let low = 0;
       let high = 1 / 120;
@@ -84,6 +100,7 @@ if (logoReplay && staticLayers.length === 3 && shovel && clearance && particles.
       play(particle, frames, { delay: impactTime, duration: duration * 1000, easing: "linear" });
     });
   };
+  // On replay, the shed remains in place and only the shovel and particles run again.
   const start = (replay = false) => {
     const layers = replay ? animations.slice(staticLayers.length) : animations;
     const run = ++animationRun;
@@ -108,6 +125,7 @@ if (logoReplay && staticLayers.length === 3 && shovel && clearance && particles.
   if (!reducedMotion.matches) start();
 }
 
+// Enable section reveals only when JavaScript is available.
 document.documentElement.classList.add("has-scroll-animations");
 const showAll = () => revealElements.forEach((element) => element.classList.add("is-visible"));
 if (reducedMotion.matches || !("IntersectionObserver" in window)) showAll();
@@ -118,6 +136,7 @@ else {
   revealElements.forEach((element) => observer.observe(element));
 }
 
+// Enhance the mobile navigation without hiding links when JavaScript is unavailable.
 if (siteHeader && navigationToggle && primaryNavigation) {
   const narrowNavigation = window.matchMedia("(max-width: 36rem)");
   const closeNavigation = () => {
