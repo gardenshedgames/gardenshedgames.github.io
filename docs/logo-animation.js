@@ -8,6 +8,7 @@ const particles = document.querySelectorAll(".hero-particle");
 
 if (logoReplay && staticLayers.length === 3 && shovel && clearance && particles.length) {
   const animations = [];
+  let animationRun = 0;
   const logoWidth = 2048;
   const logoHeight = 2124;
   const radius = 20.625;
@@ -82,11 +83,20 @@ if (logoReplay && staticLayers.length === 3 && shovel && clearance && particles.
   };
   const start = (replay = false) => {
     const layers = replay ? animations.slice(staticLayers.length) : animations;
+    const run = ++animationRun;
+    logoReplay.classList.remove("is-complete");
     layers.forEach((animation) => { animation.pause(); animation.currentTime = replay ? dropDelay : 0; animation.play(); });
+    Promise.all(layers.map((animation) => animation.finished)).then(() => {
+      if (run === animationRun && !reducedMotion.matches) logoReplay.classList.add("is-complete");
+    });
   };
   const updateMotion = () => {
     logoReplay.disabled = reducedMotion.matches;
-    if (reducedMotion.matches) animations.forEach((animation) => animation.cancel());
+    if (reducedMotion.matches) {
+      animationRun += 1;
+      animations.forEach((animation) => animation.cancel());
+      logoReplay.classList.add("is-complete");
+    }
   };
   logoReplay.addEventListener("click", () => { if (!reducedMotion.matches) start(true); });
   reducedMotion.addEventListener("change", updateMotion);
