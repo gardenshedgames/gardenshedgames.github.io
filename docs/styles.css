@@ -92,7 +92,7 @@ main { margin-top: calc(-1 * var(--header-height)); }
 .hero-ground { z-index: 6; }
 .logo-replay.is-complete .hero-static-logo { visibility: visible; }
 .logo-replay.is-complete .hero-walls, .logo-replay.is-complete .hero-roof, .logo-replay.is-complete .hero-shovel-clearance, .logo-replay.is-complete .hero-shovel, .logo-replay.is-complete .hero-particle, .logo-replay.is-complete .hero-ground { visibility: hidden; }
-.button { display: inline-block; padding: .8rem 1.2rem; border: 2px solid var(--accent); background: var(--accent); color: #fff; font-weight: 800; text-decoration: none; }
+.button { display: inline-block; padding: .8rem 1.2rem; border: 2px solid var(--accent); background: var(--accent); color: #fff; font-weight: 600; text-decoration: none; }
 .button:hover { border-color: #fff; background: #fff; color: #111; }
 
 /* Contact links */
