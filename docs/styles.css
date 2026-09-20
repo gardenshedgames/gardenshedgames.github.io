@@ -73,8 +73,9 @@ main { margin-top: calc(-1 * var(--header-height)); }
 .service-card p:last-child { margin: 0; color: #d0d0d0; }
 .service-card:nth-child(2) { transition-delay: .08s; }
 .service-card:nth-child(3) { transition-delay: .16s; }
-.service-card:nth-child(4) { transition-delay: .24s; }
-.services-cta { margin: 2rem 0 0; }
+.services-outro { max-width: 40rem; margin: 3rem auto 0; padding-top: 2rem; border-top: 1px solid rgba(33, 135, 33, .65); text-align: center; }
+.services-outro-copy { margin-bottom: 0; }
+.services-cta { margin: .75rem 0 0; }
 
 /* Layered logo animation */
 .logo-replay { position: relative; display: block; width: min(100%, 22rem); aspect-ratio: 2048 / 2124; padding: 0; border: 0; background: transparent; }

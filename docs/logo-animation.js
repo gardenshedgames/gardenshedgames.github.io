@@ -67,7 +67,9 @@ if (logoReplay && staticLayers.length === 3 && shovel && clearance && particles.
     const scaleX = bounds.width / logoWidth;
     const scaleY = bounds.height / logoHeight;
     const dropDistance = bounds.height + Math.max(0, bounds.top) + 100 * scaleY;
-    const shovelFrames = [{ transform: `translateY(-${dropDistance}px) rotate(75deg)` }, { transform: "translateY(0) rotate(0deg)" }];
+    // Align the animated shovel's final frame with the assembled logo artwork.
+    const restingShovelOffset = 12 * scaleY;
+    const shovelFrames = [{ transform: `translateY(-${dropDistance}px) rotate(75deg)` }, { transform: `translateY(${restingShovelOffset}px) rotate(0deg)` }];
     staticLayers.forEach((layer) => play(layer, [{ opacity: 0 }, { opacity: 1 }], { delay: fadeDelay, duration: fadeDuration, easing: "ease-out", fill: "backwards" }));
     [clearance, shovel].forEach((layer) => play(layer, shovelFrames, { delay: dropDelay, duration: dropDuration, easing: "cubic-bezier(.55, 0, 1, .45)", fill: "backwards" }));
     particles.forEach((particle, index) => {
