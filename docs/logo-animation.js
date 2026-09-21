@@ -17,8 +17,15 @@ const particles = document.querySelectorAll(".hero-particle");
 if (logoReplay && staticLayers.length === 3 && shovel && clearance && particles.length) {
   // Retained Web Animations instances make a replay possible without rebuilding the DOM.
   const animations = [];
+  // The impact sound is decoded once and scheduled against the shovel animation.
+  let audioContext;
+  let soundBuffer;
+  let soundReady;
+  let impactSound;
   // Prevents an earlier animation's completion callback replacing a newer replay.
   let animationRun = 0;
+  // The layered animation is built only once, when the hero first becomes visible.
+  let isPrepared = false;
   // The SVG artwork's coordinate system, used to translate artwork values into CSS pixels.
   const logoWidth = 2048;
   const logoHeight = 2124;
@@ -61,12 +68,74 @@ if (logoReplay && staticLayers.length === 3 && shovel && clearance && particles.
     animation.currentTime = 0;
     animations.push(animation);
   };
+  const preloadSound = () => {
+    // Chrome does not permit fetching audio from a file:// preview.
+    if (window.location.protocol === "file:") return Promise.resolve(false);
+    if (soundBuffer) return Promise.resolve(true);
+    if (soundReady) return soundReady;
+    soundReady = new Promise((resolve) => {
+      try {
+        const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+        audioContext = new AudioContextClass();
+        fetch("assets/shovel-sfx.mp3")
+          .then((response) => {
+            if (!response.ok) throw new Error("Sound could not be loaded");
+            return response.arrayBuffer();
+          })
+          .then((data) => audioContext.decodeAudioData(data))
+          .then((buffer) => {
+            soundBuffer = buffer;
+            resolve(true);
+          })
+          .catch(() => resolve(false));
+      } catch {
+        resolve(false);
+      }
+    });
+    return soundReady;
+  };
+  const stopSound = () => {
+    if (impactSound) {
+      impactSound.stop();
+      impactSound.disconnect();
+      impactSound = undefined;
+    }
+  };
+  const unlockSound = () => {
+    preloadSound();
+    if (audioContext?.state === "suspended") audioContext.resume().catch(() => {});
+  };
+  const scheduleImpactSound = (run, fromGesture) => {
+    preloadSound().then((soundLoaded) => {
+      if (!soundLoaded || run !== animationRun || reducedMotion.matches) return;
+      const startSound = () => {
+        if (run !== animationRun || audioContext.state !== "running") return;
+        const shovelAnimation = animations[staticLayers.length];
+        const elapsed = Number(shovelAnimation.currentTime) || 0;
+        const remaining = (impactTime - elapsed) / 1000;
+        if (remaining <= 0) return;
+        const source = audioContext.createBufferSource();
+        source.buffer = soundBuffer;
+        source.connect(audioContext.destination);
+        source.onended = () => {
+          source.disconnect();
+          if (impactSound === source) impactSound = undefined;
+        };
+        impactSound = source;
+        source.start(audioContext.currentTime + remaining);
+      };
+      if (audioContext.state === "running") startSound();
+      else if (fromGesture) audioContext.resume().then(startSound).catch(() => {});
+    });
+  };
   // Builds the Web Animations once, using the logo's rendered size for scaling.
   const prepare = () => {
     const bounds = logoReplay.getBoundingClientRect();
     const scaleX = bounds.width / logoWidth;
     const scaleY = bounds.height / logoHeight;
-    const dropDistance = bounds.height + Math.max(0, bounds.top) + 100 * scaleY;
+    // Use the logo's document position so restored anchor scrolling cannot shorten the drop.
+    const logoDocumentTop = bounds.top + window.scrollY;
+    const dropDistance = bounds.height + Math.max(0, logoDocumentTop) + 100 * scaleY;
     // Align the animated shovel's final frame with the assembled logo artwork.
     const restingShovelOffset = 12 * scaleY;
     const shovelFrames = [{ transform: `translateY(-${dropDistance}px) rotate(75deg)` }, { transform: `translateY(${restingShovelOffset}px) rotate(0deg)` }];
@@ -106,25 +175,59 @@ if (logoReplay && staticLayers.length === 3 && shovel && clearance && particles.
   const start = (replay = false) => {
     const layers = replay ? animations.slice(staticLayers.length) : animations;
     const run = ++animationRun;
+    stopSound();
     logoReplay.classList.remove("is-complete");
     layers.forEach((animation) => { animation.pause(); animation.currentTime = replay ? dropDelay : 0; animation.play(); });
+    scheduleImpactSound(run, replay);
     Promise.all(layers.map((animation) => animation.finished)).then(() => {
       if (run === animationRun && !reducedMotion.matches) logoReplay.classList.add("is-complete");
     });
   };
   const updateMotion = () => {
-    logoReplay.disabled = reducedMotion.matches;
+    logoReplay.disabled = !isPrepared || reducedMotion.matches;
     if (reducedMotion.matches) {
       animationRun += 1;
       animations.forEach((animation) => animation.cancel());
       logoReplay.classList.add("is-complete");
     }
   };
-  logoReplay.addEventListener("click", () => { if (!reducedMotion.matches) start(true); });
+  logoReplay.addEventListener("click", () => {
+    unlockSound();
+    if (!reducedMotion.matches) start(true);
+  });
+  // A visitor's first interaction permits sound when the animation later enters view.
+  document.addEventListener("pointerdown", unlockSound, { once: true });
   reducedMotion.addEventListener("change", updateMotion);
-  prepare();
-  updateMotion();
-  if (!reducedMotion.matches) start();
+  const beginLogoAnimation = () => {
+    if (isPrepared) return;
+    isPrepared = true;
+    prepare();
+    updateMotion();
+    if (!reducedMotion.matches) start();
+  };
+  // Wait for hash navigation to settle, then measure only once the hero is on screen.
+  const initialiseLogoAnimation = () => window.requestAnimationFrame(() => {
+    if (!("IntersectionObserver" in window)) {
+      beginLogoAnimation();
+      return;
+    }
+    // A restored non-home hash can briefly report the hero as visible before its scroll restores.
+    let hasLeftInitialView = !window.location.hash || window.location.hash === "#top";
+    const logoObserver = new IntersectionObserver((entries, currentObserver) => {
+      const isVisible = entries.some((entry) => entry.isIntersecting);
+      if (!isVisible) {
+        hasLeftInitialView = true;
+        return;
+      }
+      if (hasLeftInitialView) {
+        currentObserver.disconnect();
+        beginLogoAnimation();
+      }
+    }, { threshold: 0.15 });
+    logoObserver.observe(logoReplay);
+  });
+  if (document.readyState === "complete") initialiseLogoAnimation();
+  else window.addEventListener("load", initialiseLogoAnimation, { once: true });
 }
 
 // Enable section reveals only when JavaScript is available.

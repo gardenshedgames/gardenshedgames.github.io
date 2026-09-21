@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128" fill="none" stroke="#218721" stroke-linecap="round" stroke-linejoin="round">
+  <title>Hand trowel</title>
+  <path d="M40 51 75 86q4 4 0 8l-17 17q-11 11-28 13l-16 2q-9 1-9-9l3-35q1-11 8-18l16-16q4-4 8 3Z" stroke-width="10"/>
+  <rect x="74" y="9" width="28" height="66" rx="14" transform="rotate(45 88 42)" stroke-width="10"/>
+  <path d="m66 61-28 28" stroke-width="13"/>
+</svg>
