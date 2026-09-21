@@ -73,8 +73,9 @@ main { margin-top: calc(-1 * var(--header-height)); }
 .service-card p:last-child { margin: 0; color: #d0d0d0; }
 .service-card:nth-child(2) { transition-delay: .08s; }
 .service-card:nth-child(3) { transition-delay: .16s; }
-.services-outro { max-width: 40rem; margin: 3rem auto 0; padding-top: 2rem; border-top: 1px solid rgba(33, 135, 33, .65); text-align: center; }
+.services-outro, .about-cta { max-width: 40rem; margin: 3rem auto 0; padding-top: 2rem; border-top: 1px solid rgba(33, 135, 33, .65); text-align: center; }
 .services-outro-copy { margin-bottom: 0; }
+.about-cta p { margin-bottom: .75rem; }
 .services-cta { margin: .75rem 0 0; }
 
 /* Layered logo animation */
@@ -109,7 +110,8 @@ main { margin-top: calc(-1 * var(--header-height)); }
 /* Footer */
 .site-footer { border-top: 1px solid var(--line); font-size: .9rem; }
 .site-footer p { margin: 0; }
-.site-footer a { text-underline-offset: .25em; }
+.site-footer a { text-decoration: none; text-underline-offset: .25em; }
+.site-footer a:hover { color: var(--accent); text-decoration: underline; }
 
 /* Motion preferences */
 @media (prefers-reduced-motion: reduce) {
