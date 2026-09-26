@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="130 160 730 730" role="img" aria-labelledby="rake-title">
+  <title id="rake-title">Garden rake</title>
+  <g fill="#218721" transform="rotate(38 512 512)">
+    <!-- Long handle with a gently rounded end. -->
+    <path d="M488 126 A24 24 0 0 1 536 126 L530 588 H494Z"/>
+    <!-- Open triangular bow connects the handle to the head. -->
+    <path d="M400 690 L512 581 L624 690" fill="none" stroke="#218721" stroke-width="28" stroke-linecap="round" stroke-linejoin="round"/>
+    <!-- Straight crossbar and five widely spaced teeth for small-size readability. -->
+    <rect x="314" y="677" width="396" height="36" rx="10"/>
+    <path d="M314 703 H350 V806 Q350 820 336 820 H328 Q314 820 314 806Z
+             M404 703 H440 V806 Q440 820 426 820 H418 Q404 820 404 806Z
+             M494 703 H530 V806 Q530 820 516 820 H508 Q494 820 494 806Z
+             M584 703 H620 V806 Q620 820 606 820 H598 Q584 820 584 806Z
+             M674 703 H710 V806 Q710 820 696 820 H688 Q674 820 674 806Z"/>
+  </g>
+</svg>

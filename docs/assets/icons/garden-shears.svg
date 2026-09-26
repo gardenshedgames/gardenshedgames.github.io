@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="116 88 803 837" role="img" aria-labelledby="shears-title">
+  <title id="shears-title">Garden shears</title>
+  <defs>
+    <mask id="shears-pivot" maskUnits="userSpaceOnUse" x="100" y="80" width="820" height="860">
+      <rect x="100" y="80" width="820" height="860" fill="white"/>
+      <circle cx="552" cy="486" r="54" fill="black"/>
+    </mask>
+  </defs>
+  <g stroke="#218721" stroke-linecap="round" stroke-linejoin="round" mask="url(#shears-pivot)">
+    <!-- Long tapered blades with straight cutting edges. -->
+    <path d="M510 479 L653 200 L740 106 L588 500Z" fill="none" stroke-width="28"/>
+    <path d="M567 452 L901 277 L814 379 L553 530Z" fill="none" stroke-width="28"/>
+    <!-- Short shanks connect the pivot to two solid grips. -->
+    <path d="M530 480 L415 510 L374 544 M566 508 L538 622 L507 683" fill="none" stroke-width="42"/>
+    <path d="M381 513 Q403 503 415 526 L428 551 Q439 572 416 584 L184 708 Q155 724 139 697 L130 680 Q114 650 144 634Z" fill="#218721" stroke-width="12"/>
+    <path d="M487 646 Q497 621 522 632 L551 645 Q575 656 564 682 L466 895 Q453 924 423 911 L403 902 Q375 889 388 860Z" fill="#218721" stroke-width="12"/>
+  </g>
+  <circle cx="552" cy="486" r="54" fill="none" stroke="#218721" stroke-width="28"/>
+  <circle cx="552" cy="486" r="16" fill="#218721"/>
+</svg>

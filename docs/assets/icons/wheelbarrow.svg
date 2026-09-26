@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="65 215 890 550" role="img" aria-labelledby="wheelbarrow-title">
+  <title id="wheelbarrow-title">Garden wheelbarrow</title>
+  <g fill="#218721">
+    <!-- Solid tub, separated from the frame by a transparent gap. -->
+    <path d="M310 299 H884 Q910 299 893 319 L731 505 Q717 521 697 515 L390 429 Q373 424 363 409 L299 317 Q287 299 310 299Z"/>
+    <!-- Straight handle, chassis, and triangular support leg. -->
+    <path d="M93 246 L240 278 L350 463 L804 618" fill="none" stroke="#218721" stroke-width="30" stroke-linecap="square" stroke-linejoin="round"/>
+    <path d="M350 463 L369 669 H418 L554 522" fill="none" stroke="#218721" stroke-width="30" stroke-linecap="round" stroke-linejoin="round"/>
+    <!-- Open circular wheel, with the frame meeting its centre. -->
+    <circle cx="804" cy="618" r="77" fill="none" stroke="#218721" stroke-width="30"/>
+  </g>
+</svg>

@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="190 172 666 666" role="img" aria-labelledby="trowel-title">
+  <title id="trowel-title">Hand trowel</title>
+  <g fill="#218721" transform="rotate(40 512 512)">
+    <!-- Rounded handle, narrow tang, and broad shield-shaped blade. -->
+    <rect x="444" y="100" width="136" height="300" rx="68"/>
+    <rect x="488" y="380" width="48" height="170" rx="24"/>
+    <path fill-rule="evenodd" d="M376 506 H648 Q662 506 662 520 V672 C662 768 591 863 512 926 C433 863 362 768 362 672 V520 Q362 506 376 506Z M482 566 Q476 566 478 574 L508 718 Q512 734 516 718 L546 574 Q548 566 542 566Z"/>
+  </g>
+</svg>

@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="120 94 720 812" role="img" aria-labelledby="secateurs-title">
+  <title id="secateurs-title">Garden secateurs</title>
+  <defs>
+    <mask id="clear-hinge" maskUnits="userSpaceOnUse" x="100" y="80" width="790" height="850">
+      <rect x="100" y="80" width="790" height="850" fill="white"/>
+      <circle cx="550" cy="450" r="66" fill="black"/>
+    </mask>
+  </defs>
+  <g fill="none" stroke="#218721" stroke-width="34" stroke-linecap="round" stroke-linejoin="round" mask="url(#clear-hinge)">
+    <!-- Two blades meet directly at the circular hinge. -->
+    <path d="M515 397 L674 116 C728 213 722 322 610 412"/>
+    <path d="M608 395 C701 359 769 298 800 231 C840 344 760 449 609 472"/>
+    <!-- Solid handles with no connecting spring or hinge tabs. -->
+    <path fill="#218721" d="M507 404 L422 421 L167 576 C118 607 160 675 204 648 L464 493 L513 490Z"/>
+    <path fill="#218721" d="M587 495 Q626 530 598 582 L472 859 C449 912 377 883 399 831 L510 573 Q525 538 523 503Z"/>
+  </g>
+  <circle cx="550" cy="450" r="66" fill="none" stroke="#218721" stroke-width="30"/>
+  <circle cx="550" cy="450" r="19" fill="#218721"/>
+</svg>
