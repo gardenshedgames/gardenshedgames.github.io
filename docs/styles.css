@@ -120,6 +120,8 @@ main { margin-top: calc(-1 * var(--header-height)); }
 .contact-links { display: grid; gap: .75rem; margin: 2rem 0 0; padding: 0; list-style: none; }
 .contact-links a { display: flex; align-items: center; gap: .75rem; min-height: 3.25rem; padding: .75rem 1rem; border: 1px solid var(--line); background: var(--surface-raised); font-weight: 700; text-decoration: none; }
 .contact-links a:hover { border-color: var(--accent); background: var(--accent); }
+.contact-links .contact-email { border-color: var(--accent); background: #171c17; }
+.contact-links .contact-email:hover { background: #1b231c; }
 .contact-links img { width: 1.5rem; height: 1.5rem; flex: 0 0 auto; }
 
 /* Footer */
