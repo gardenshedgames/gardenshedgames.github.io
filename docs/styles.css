@@ -37,7 +37,7 @@ main { margin-top: calc(-1 * var(--header-height)); }
 .header-content, .footer-content { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; }
 .header-content { position: relative; min-height: var(--header-height); }
 .footer-content { min-height: 5rem; }
-.brand { display: inline-flex; align-items: center; gap: .7rem; color: #fff; font-size: 1rem; font-weight: 800; letter-spacing: -.03em; text-decoration: none; }
+.brand { display: inline-flex; align-items: center; gap: .7rem; color: #fff; font-size: 1rem; font-weight: 600; letter-spacing: -.03em; text-decoration: none; }
 .brand-mark { display: block; flex: 0 0 auto; width: auto; height: 2.6rem; }
 .navigation { display: flex; flex-wrap: wrap; gap: 1.25rem; margin: 0; padding: 0; list-style: none; }
 .navigation a { display: block; padding: .65rem .5rem; text-decoration: none; }
