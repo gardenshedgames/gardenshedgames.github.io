@@ -1,0 +1,21 @@
+GARDEN SHED GAMES - INSTANTPRINT PROOFING SUBMISSION
+
+Upload these two PDFs:
+1. GardenShedGames_Artwork.pdf: page 1 front, page 2 back.
+2. GardenShedGames_SpotUV.pdf: one page containing the front varnish mask only. No reverse varnish.
+
+Selected order: 250 double-sided business cards, 450gsm silk, matt lamination both sides, square cut, single-sided high-build Spot UV.
+Finished size: 85 x 55 mm. Supplied size: 91 x 61 mm with 3 mm bleed.
+Colour artwork: 8-bit CMYK, ISO Coated v2 (ECI), based on FOGRA39; embedded image profile and PDF output intent.
+Raster dimensions: 1075 x 720 (approximately 300 ppi at the exact PDF page size).
+Spot UV: 100% K shapes on white, aligned to front artwork. Black means varnish, not additional printed black.
+Apply UV over the solid outer logo silhouette including its interior spaces, plus title letters. No UV on tagline or reverse.
+No crop marks. These are ordinary PDFs with output intent, not certified PDF/X.
+
+NOTE FOR THE ARTWORK TEAM
+Please preserve the supplied CMYK values and confirm any required destination-profile conversion before production. A previous automatic proof changed K-only black into four-colour black and removed the embedded profile/output intent. Please provide downloadable colour and Spot UV proofs, including the overlay showing varnish registration.
+The reverse QR is intentionally off-white on charcoal, with a clear charcoal quiet zone. It encodes https://gardenshedgames.com/bizcard and decodes in our digital checks. Please check it in the returned proof and on a physical sample before the run.
+
+Proof checks: front/back order; name David Ogle; phone +44 (0)7791 657276; contact@gardenshedgames.com; gardenshedgames.com; headline and Flexible wording; no QR caption; front-only varnish registration.
+
+Guide: https://www.instantprint.co.uk/printspiration/print-design-tips/spot-uv-artwork-guide
