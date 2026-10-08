@@ -263,3 +263,72 @@ if (siteHeader && navigationToggle && primaryNavigation) {
     if (!event.matches) closeNavigation();
   });
 }
+
+// Slide the service descriptions open and closed while retaining native disclosure semantics.
+const serviceDetails = document.querySelectorAll(".service-details");
+const animateServiceDetails = (details, shouldOpen) => {
+  const description = details.querySelector(".service-description");
+  if (!description) return;
+
+  if (shouldOpen) {
+    serviceDetails.forEach((otherDetails) => {
+      if (otherDetails !== details && otherDetails.open) animateServiceDetails(otherDetails, false);
+    });
+  }
+  if (reducedMotion.matches) {
+    details.open = shouldOpen;
+    return;
+  }
+  details._slideAnimation?.cancel();
+
+  if (shouldOpen) {
+    delete details.dataset.closing;
+    details.open = true;
+    const targetHeight = description.scrollHeight;
+    description.style.height = "0px";
+    description.style.opacity = "0";
+    const animation = description.animate([
+      { height: "0px", opacity: 0 },
+      { height: `${targetHeight}px`, opacity: 1 }
+    ], { duration: 260, easing: "ease-out" });
+    details._slideAnimation = animation;
+    animation.onfinish = () => {
+      description.style.height = "";
+      description.style.opacity = "";
+      details._slideAnimation = undefined;
+    };
+  } else {
+    details.dataset.closing = "true";
+    const startHeight = description.getBoundingClientRect().height;
+    description.style.height = `${startHeight}px`;
+    description.style.opacity = "1";
+    const animation = description.animate([
+      { height: `${startHeight}px`, opacity: 1 },
+      { height: "0px", opacity: 0 }
+    ], { duration: 200, easing: "ease-in" });
+    details._slideAnimation = animation;
+    animation.onfinish = () => {
+      details.open = false;
+      delete details.dataset.closing;
+      description.style.height = "";
+      description.style.opacity = "";
+      details._slideAnimation = undefined;
+    };
+  }
+};
+
+// Treat each service card as its disclosure control, while retaining a native summary for keyboard users.
+document.querySelectorAll(".service-card").forEach((card) => {
+  const details = card.querySelector(".service-details");
+  const summary = details?.querySelector("summary");
+  if (!details || !summary) return;
+  const toggleDetails = () => animateServiceDetails(details, !details.open || details.dataset.closing === "true");
+  summary.addEventListener("click", (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+    toggleDetails();
+  });
+  card.addEventListener("click", (event) => {
+    if (!event.target.closest("summary")) toggleDetails();
+  });
+});
